@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import {useEffect} from 'react'
+import './App.css';
+import {connect} from 'react-redux'
+import { Routes, Route } from "react-router-dom";
+import Header from './components/Header';
+import LogIn from './components/LogIn';
+import { handleUserData } from './actions/shared';
+
+function App(props) {
+  useEffect(()=>{
+    props.dispatch(handleUserData())
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header></Header>
+      <Routes>
+        <Route exact path='/' element={<LogIn/>}/>
+      </Routes>
     </div>
   );
 }
 
-export default App;
+export default connect()(App);
