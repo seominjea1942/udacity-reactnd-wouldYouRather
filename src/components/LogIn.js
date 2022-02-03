@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
 import ProfilePhoto from './ProfilePhoto';
+import { setAuthedUser } from '../actions/authedUser';
 
-function LogIn({dispatch, users}) {
-
-    const [currentUser, setCurrentUser] = useState('meow')
+function LogIn({dispatch, users, authedUserId}) {
 
     const getCurrentUser = (e,id) => {
         e.preventDefault();
-        setCurrentUser(users[id].name)
+        dispatch(setAuthedUser(id))
     }
 
     return (
@@ -21,7 +20,7 @@ function LogIn({dispatch, users}) {
                 <img src="" alt="" />
                 <h1>Sign in</h1>
                 <div name="userSelectDropDown" id="userSelectDropDown">
-                    <button>{currentUser}</button>
+                    <button>{JSON.stringify(users)!=='{}'?users[authedUserId].name:null}</button>
                     {
                         Object.keys(users).map((userName)=>(
                             <a className="userOption" href="/" onClick={(e)=>{getCurrentUser(e,users[userName].id)}} key={userName}>
@@ -40,9 +39,10 @@ function LogIn({dispatch, users}) {
     );
 }
 
-const mapStateToProps = ({users}) => {
+const mapStateToProps = ({users, authedUser}) => {
     return {
-        users
+        users,
+        authedUserId:authedUser
     }
 }
 
