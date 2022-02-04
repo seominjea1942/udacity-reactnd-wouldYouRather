@@ -75,3 +75,25 @@ h2 {
   text-decoration: none;
   color:black;
 }
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+.header ul {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+.header li {
+  margin-right: 1rem;
+}
+
+.header li a {
+  text-decoration: none;
+  color:black;
+}
+
+.scoreCard {
+  display: flex;
+}
