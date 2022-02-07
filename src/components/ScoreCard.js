@@ -1,6 +1,13 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ProfilePhoto from './ProfilePhoto';
 function ScoreCard({user}) {
+    const [numAQ, setNumAQ] = useState(0)
+    const [numCQ, setNumCQ] = useState(0)
+
+    useEffect(()=>{
+        setNumAQ(Object.keys(user.answers).length)
+        setNumCQ(user.questions.length)
+    },[user])
     return (
         <div className="scoreCard">
             <div>
@@ -13,16 +20,17 @@ function ScoreCard({user}) {
             <h1>{user.name}</h1>
                 <div>
                     <p>Answered questions</p>
-                    <h5>{user.answeredQuestions}</h5>
+
+                    <h5>{numAQ}</h5>
                 </div>
                 <div>
                     <p>Created questions</p>
-                    <h5>{user.createdQuestions}</h5>
+                    <h5>{numCQ}</h5>
                 </div>
             </div>
             <div>
                 <div>score</div>
-                <div>{user.score}</div>
+                <div>{numAQ+numCQ}</div>
             </div>
         </div>
     );

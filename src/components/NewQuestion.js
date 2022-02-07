@@ -1,11 +1,12 @@
 import React,{ useState } from 'react';
 import { connect } from 'react-redux'
-import {formatQuestion, _saveQuestion} from '../utils/_DATA'
-import {handleAddQuestion} from '../actions/questions'
+import {hanadleCreateNewQuestion} from '../actions/shared'
+import { useNavigate } from 'react-router-dom'
 
 function NewQuestion({dispatch, users, questions, authedUser}) {
     const [firstOptionText , setFirstOptionText] = useState('')
     const [secondOptionText , setSecondOptionText] = useState('')
+    const navigate = useNavigate();
 
     const getTextInputValue = (e) => {
         if(e.target.id === 'firstOption'){
@@ -15,9 +16,10 @@ function NewQuestion({dispatch, users, questions, authedUser}) {
         }
     }
     const handleQuestionSubmit =(e)=>{
-        dispatch(handleAddQuestion(firstOptionText,secondOptionText,authedUser))
+        dispatch(hanadleCreateNewQuestion(firstOptionText,secondOptionText,authedUser))
         setFirstOptionText('')
         setSecondOptionText('')
+        navigate('/')
     }
     return (
         <div>

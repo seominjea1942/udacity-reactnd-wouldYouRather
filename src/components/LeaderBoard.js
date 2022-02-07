@@ -14,12 +14,15 @@ function LeaderBoard({dispatch, users}) {
 
 const mapStateToProps = ({users}) => {
     let usersValues = Object.values(users)
-    usersValues.sort((a,b)=>b.score-a.score)
+    usersValues.sort((a,b)=>{
+        const aScore = Object.keys(a.answers).length + a.questions.length
+        const bScore = Object.keys(b.answers).length + b.questions.length
+        return (bScore-aScore>0)?1:(bScore-aScore===0)?0:-1
+    })
     const newUsers = {}
     usersValues.forEach((user)=>{
         newUsers[user.id] = user
     })
-    console.log(newUsers)
     return {
         users: newUsers
     }

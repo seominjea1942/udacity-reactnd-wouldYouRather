@@ -1,4 +1,4 @@
-import { RECEVIE_QUESTIONS } from "../actions/questions";
+import { RECEVIE_QUESTIONS, UPDATE_QUESTION } from "../actions/questions";
 import { ADD_QUESTION } from "../actions/questions";
 
 const questions = (state={}, action) => {
@@ -14,7 +14,10 @@ const questions = (state={}, action) => {
                 ...state,
                 [question.id]: question
             }
-
+        case UPDATE_QUESTION:
+            return {
+                ...Object.assign(state, action.question)
+            }
         default:
             return state
     }
